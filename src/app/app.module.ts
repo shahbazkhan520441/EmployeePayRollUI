@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatRadioModule } from '@angular/material/radio';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
@@ -8,10 +8,14 @@ import { AddUserComponent } from './component/add-user/add-user.component';
 import { HomePageComponent } from './component/home-page/home-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatSliderModule} from '@angular/material/slider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -27,13 +31,13 @@ export const MY_DATE_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
-
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     AddUserComponent,
     HomePageComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -42,11 +46,14 @@ export const MY_DATE_FORMATS = {
     HttpClientModule,
     AngularMaterialModule,
     ReactiveFormsModule, 
+    FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRadioModule,
+    MatSliderModule
+    
+
   ],
   providers: [
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },

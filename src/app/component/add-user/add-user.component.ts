@@ -16,6 +16,12 @@ export class AddUserComponent implements OnInit {
   public employee: Employee = new Employee();
   employeeFormGroup: FormGroup;
 
+  public operation:any="Submit"
+
+  updatesumitutton(action :Event){
+    this.operation= action
+  }
+
   departments: Array<any> = [
     { id: 1, name: 'HR', value: 'HR', checked: false },
     { id: 2, name: 'Sales', value: 'Sales', checked: false },
@@ -67,46 +73,29 @@ export class AddUserComponent implements OnInit {
           this.employeeFormGroup.get('salary')?.setValue(employee.salary);
           this.employeeFormGroup.get('startDate')?.setValue(employee.startDate);
           this.employeeFormGroup.get('notes')?.setValue(employee.notes);
-          // const departments: FormArray = this.employeeFormGroup.get('departments') as FormArray;
-          // // departments.clear();
-          // employee.departments.forEach(departmentElement => {
-            
-          //   for (let index = 0; index < this.departments.length; index++) {
-          //     console.log(this.departments[index].name === departmentElement)
-          //     if(this.departments[index].name === departmentElement) {
-          //       this.departments[index].checked = true;
-          //       departments.push(new FormControl(this.departments[index].value));
-          //     }
-          //   }
-          // })
-      //           const departments: FormArray = this.employeeFormGroup.get('departments') as FormArray;
-      // employee.departments.forEach(dept => {
-      //   const matched = this.departments.find(d => d.name === dept);
-      //   if (matched) {
-      //     matched.checked = true;
-      //     departments.push(new FormControl(matched.value));
-      //   }
-      // })
+      
+        const department: FormArray = this.employeeFormGroup.get('departments') as FormArray;
+         console.log(department)
+        console.log(department.value)
+         console.log(department.getRawValue)
+         console.log(department.get.bind.name)
+         console.log(employee.departments)
+          // // Reset the departments FormArray to ensure no duplicates.
+          // department.clear();
 
-      // Assuming `employeeFormGroup` is a FormGroup and has a FormArray named 'departments'.
-const department: FormArray = this.employeeFormGroup.get('departments') as FormArray;
+        // Iterate through the employee's departments array.
+        employee.departments.forEach((dept: string) => {
+          // Find the matching department in the available departments list.
+          const matched = this.departments.find(d => d.name === dept);
 
-// Reset the departments FormArray to ensure no duplicates.
-department.clear();
+          if (matched) {
+            // Mark the department as checked.
+            matched.checked = true;
 
-// Iterate through the employee's departments array.
-employee.departments.forEach((dept: string) => {
-  // Find the matching department in the available departments list.
-  const matched = this.departments.find(d => d.name === dept);
-
-  if (matched) {
-    // Mark the department as checked.
-    matched.checked = true;
-
-    // Add the value to the FormArray.
-    department.push(new FormControl(matched.value));
-  }
-});
+            // Add the value to the FormArray.
+            department.push(new FormControl(matched.value));
+          }
+        });
 
 
         }
@@ -122,7 +111,9 @@ employee.departments.forEach((dept: string) => {
    */
    onCheckboxChange(event: MatCheckboxChange) {
     const department: FormArray = this.employeeFormGroup.get('departments') as FormArray;
-    department.clear();
+    console.log(department)
+    console.log(department.value)
+    // department.clear();
     if (event.checked) {
       department.push(new FormControl(event.source.value));
     } else {
@@ -134,19 +125,25 @@ employee.departments.forEach((dept: string) => {
   // /**
   //  * To read Salary value from slider
   //  */
-  //  salary: number = 400000;
-  //  updateSetting(event:any) {
-  //    this.salary = event.value;
-  //  }
- 
-   formatLabel(value: number) {
-     if (value >= 1000) {
-       return Math.round(value / 1000) + 'k';
-     }
-     return value;
+   salary: number = 400000;
+   updateSetting(event:any) {
+     this.salary = event.value;
    }
+ 
+
+
+  formatLabel(value: number): string {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return `${value}`;
+  }
 
   onSubmit(){
+
+    const departments = this.employeeFormGroup.get('departments') as FormArray;
+    console.log(departments.value);
     console.log(this.employeeFormGroup.value)
     console.log(this.employeeFormGroup.invalid)
 
