@@ -61,7 +61,7 @@
     </div>
 
     <!------Input Department------->
-    <div class="row-content">
+    <!-- <div class="row-content">
       <label class="label text" for="department">Department</label>
       <div *ngFor="let department of departments">
         
@@ -70,14 +70,34 @@
           <label class="text">{{department.name}}</label>
         </mat-checkbox>
       </div>
-    </div>
+    </div> -->
+
+    <!-- Input Department -->
+<div class="row-content">
+  <label class="label text" for="department">Department</label>
+  <div *ngFor="let department of departments">
+    <mat-checkbox 
+      class="checkbox" 
+      color="primary" 
+      [value]="department.value"
+      [checked]="department.checked" 
+      (change)="onCheckboxChange($event)">
+      <span class="text">{{ department.name }}</span>
+    </mat-checkbox>
+  </div>
+</div>
+
 
     <!-----Input Salary------>
     <div class="row-content">
       <label class="label text" for="salary">Choose your Salary </label>
-      <mat-slider thumbLabel color="primary"
+      <!-- <mat-slider thumbLabel color="primary"
         tickInterval="1000" aria-label="units" class="salary-input" name="salary" min="300000" 
         max="500000" step="1000" formControlName="salary">
+        <input matSliderThumb>
+      </mat-slider> -->
+      <mat-slider color="primary" min="300000" max="500000" step="1000" showTickMarks discrete [displayWith]="formatLabel" >
+        <input matSliderThumb formControlName="salary">
       </mat-slider>
     </div>
 
