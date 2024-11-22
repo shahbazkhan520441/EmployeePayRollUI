@@ -145,3 +145,11 @@ mat-slider {
   color: black;
   width: 1000px;
 }
+
+.department-checkbox-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows checkboxes to wrap to the next line */
+  gap: 15px; /* Space between checkboxes */
+}
+
+

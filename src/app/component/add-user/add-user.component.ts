@@ -15,6 +15,7 @@ import { HttpService } from 'src/app/service/http.service';
 export class AddUserComponent implements OnInit {
   public employee: Employee = new Employee();
   employeeFormGroup: FormGroup;
+  submitted: boolean = false; 
 
   public operation:any="Submit"
 
@@ -74,29 +75,15 @@ export class AddUserComponent implements OnInit {
           this.employeeFormGroup.get('startDate')?.setValue(employee.startDate);
           this.employeeFormGroup.get('notes')?.setValue(employee.notes);
       
-        const department: FormArray = this.employeeFormGroup.get('departments') as FormArray;
-         console.log(department)
-        console.log(department.value)
-         console.log(department.getRawValue)
-         console.log(department.get.bind.name)
-         console.log(employee.departments)
-          // // Reset the departments FormArray to ensure no duplicates.
-          // department.clear();
-
-        // Iterate through the employee's departments array.
-        employee.departments.forEach((dept: string) => {
-          // Find the matching department in the available departments list.
-          const matched = this.departments.find(d => d.name === dept);
-
-          if (matched) {
-            // Mark the department as checked.
-            matched.checked = true;
-
-            // Add the value to the FormArray.
-            department.push(new FormControl(matched.value));
-          }
-        });
-
+          const department: FormArray = this.employeeFormGroup.get('departments') as FormArray;
+          department.clear();
+          employee.departments.forEach((dept: string) => {
+            const matched = this.departments.find(d => d.name === dept);
+            if (matched) {
+              matched.checked = true;
+              department.push(new FormControl(matched.value));
+            }
+          });
 
         }
       });
@@ -141,11 +128,9 @@ export class AddUserComponent implements OnInit {
   }
 
   onSubmit(){
-
+    this.submitted = true
     const departments = this.employeeFormGroup.get('departments') as FormArray;
-    console.log(departments.value);
-    console.log(this.employeeFormGroup.value)
-    console.log(this.employeeFormGroup.invalid)
+    
 
     if(!this.employeeFormGroup.invalid){
       console.log(this.employeeFormGroup.invalid)
