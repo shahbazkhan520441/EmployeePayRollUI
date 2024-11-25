@@ -184,4 +184,8 @@ export class AddUserComponent implements OnInit {
     }
     return '';
   }
+
+   // convenience getter for easy access to form fields
+   get addUserFormControls() { return this.employeeFormGroup.controls; }
+
 }

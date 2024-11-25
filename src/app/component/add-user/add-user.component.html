@@ -40,8 +40,8 @@
           value="../assets/profile-images/Ellipse -5.png" required>
           <img class="profile" id='image5' src="../assets/profile-images/Ellipse -5.png">
         </mat-radio-button>
+        <mat-error *ngIf='addUserFormControls["profilePic"]["errors"]?.["required"] && submitted'>profilePic is required select profilePic</mat-error>
         </mat-radio-group>
-        <mat-error *ngIf="submitted && employeeFormGroup.get('profilePic')?.hasError('required')">Profile picture is required!</mat-error>
       </div>
     </div>
 
@@ -56,8 +56,8 @@
         <mat-radio-button type="radio" id="female" name="gender" color="primary" value="female" required>
           <label class="text" for="female">Female</label>
         </mat-radio-button>
+        <mat-error *ngIf='addUserFormControls["gender"]["errors"]?.["required"] && submitted'>gender is required</mat-error>
         </mat-radio-group>
-        <mat-error *ngIf="submitted && employeeFormGroup.get('gender')?.hasError('required')">Gender is required!</mat-error>
       </div>
     </div>
 
@@ -75,10 +75,9 @@
         <span class="text">{{ department.name }}</span>
       </mat-checkbox>
     </div>
-
+    <mat-error *ngIf='addUserFormControls["departments"]["errors"]?.["required"] && submitted'>department is required</mat-error>
   </div>
   
-  <mat-error *ngIf="submitted && employeeFormGroup.get('departments')?.invalid">At least one department must be selected!</mat-error>
 </div>
 
 
@@ -87,8 +86,8 @@
       <label class="label text" for="salary">Choose your Salary </label>
       <mat-slider color="primary" min="300000" max="500000" step="1000" showTickMarks discrete [displayWith]="formatLabel" >
         <input matSliderThumb formControlName="salary">
+        <mat-error *ngIf='addUserFormControls["salary"]["errors"]?.["required"] && submitted'>salary is required</mat-error>
       </mat-slider>
-      <mat-error *ngIf="submitted && employeeFormGroup.get('salary')?.hasError('required')">Salary is required!</mat-error>
     </div>
 
     <!-------Input Date------>
@@ -98,7 +97,7 @@
         <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="startDate">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="submitted && employeeFormGroup.get('startDate')?.hasError('required')">Start date is required!</mat-error>
+        <mat-error *ngIf='addUserFormControls["startDate"]["errors"]?.["required"] && submitted'>startDate is required</mat-error>
       </mat-form-field>
     </div>
 
@@ -108,7 +107,7 @@
         <mat-label>Notes</mat-label>
         <textarea matInput id="notes" class="input" name="Notes" placeholder="Write the Note" 
         style="height:100px" formControlName="notes" required></textarea>
-        <mat-error *ngIf="submitted && employeeFormGroup.get('notes')?.hasError('required')">Notes are required!</mat-error>
+        <mat-error *ngIf='addUserFormControls["notes"]["errors"]?.["required"] && submitted'>startDate is required</mat-error>
       </mat-form-field>
     </div>
 
